@@ -11,7 +11,7 @@ class IsIt19
   ##
   # This version of rubygems-isit19
 
-  VERSION = '1.1'
+  VERSION = '1.1.1'
 
   ##
   # Comments for this gem
@@ -67,7 +67,7 @@ class IsIt19
   # Returns a comment from the latest version that worked with 1.9
 
   def maybe_is_it?
-    @comments.first do |comment|
+    @comments.detect do |comment|
       comment['works_for_me']
     end
   end
