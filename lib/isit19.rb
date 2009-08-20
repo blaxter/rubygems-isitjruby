@@ -11,7 +11,7 @@ class IsIt19
   ##
   # This version of rubygems-isit19
 
-  VERSION = '1.0'
+  VERSION = '1.1'
 
   ##
   # Comments for this gem
@@ -28,10 +28,12 @@ class IsIt19
 
   def initialize(spec)
     @spec = spec
+  end
 
-    url = URI.parse "http://isitruby19.com/#{@spec.name}/comments.json"
+  def fetch!
+    comments_url = URI.parse "#{url}/comments.json"
 
-    json = Gem::RemoteFetcher.fetcher.fetch_path url
+    json = Gem::RemoteFetcher.fetcher.fetch_path comments_url
     comments = JSON.parse json
 
     comments.map! do |comment|
@@ -55,7 +57,7 @@ class IsIt19
   ##
   # Strict check for this version
 
-  def one_nine?
+  def is_it_for_sure?
     @comments.any? do |comment|
       comment['version'] == @spec.version and comment['works_for_me']
     end
@@ -64,7 +66,7 @@ class IsIt19
   ##
   # Returns a comment from the latest version that worked with 1.9
 
-  def maybe_one_nine?
+  def maybe_is_it?
     @comments.first do |comment|
       comment['works_for_me']
     end
@@ -94,5 +96,17 @@ class IsIt19
     "http://isitruby19.com/#{spec.name}"
   end
 
+  def platform
+    "1.9"
+  end
 end
 
+class IsItJruby < IsIt19
+  def url
+    "http://isitjruby.com/#{spec.name}"
+  end
+
+  def platform
+    "jruby"
+  end
+end

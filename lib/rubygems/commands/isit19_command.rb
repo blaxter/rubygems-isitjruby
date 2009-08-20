@@ -3,17 +3,16 @@ require 'rubygems/version_option'
 require 'rubygems/text'
 require 'isit19'
 
-##
-# gem command for querying the 1.9 status of installed gems
-
 class Gem::Commands::Isit19Command < Gem::Command
 
   include Gem::VersionOption
   include Gem::Text
 
-  def initialize
-    super 'isit19', 'Check isitruby19.com for ruby 1.9 compatibility',
-          :version => Gem::Requirement.default
+  COMMAND     = 'isit19'
+  DESCRIPTION = 'Check isitruby19.com for ruby 1.9 compatibility'
+
+  def initialize(command=COMMAND, description=DESCRIPTION)
+    super command, description, :version => Gem::Requirement.default
 
     add_version_option
   end
@@ -43,7 +42,8 @@ class Gem::Commands::Isit19Command < Gem::Command
 
     spec = specs.last
 
-    isit19 = IsIt19.new spec
+    isit19 = new_instance_isit(spec)
+    isit19.fetch!
 
     comments = isit19.comments
 
@@ -70,5 +70,10 @@ class Gem::Commands::Isit19Command < Gem::Command
     end
   end
 
+  protected
+
+    def new_instance_isit(spec)
+      IsIt19.new spec
+    end
 end
 

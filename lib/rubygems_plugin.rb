@@ -1,6 +1,10 @@
 require 'rubygems/command_manager'
 
-Gem::CommandManager.instance.register_command :isit19
+if PLATFORM =~ /java/
+  Gem::CommandManager.instance.register_command :isitjruby
+else
+  Gem::CommandManager.instance.register_command :isit19
+end
 
 Gem.pre_install do |i| # installer
   require 'isit19'
@@ -12,26 +16,29 @@ Gem.pre_install do |i| # installer
   spec = i.spec
   name = "#{spec.name} #{spec.version}"
 
+  isit19 = nil
   begin
-    isit19 = IsIt19.new i.spec
-  rescue Gem::RemoteFetcher::FetchError
+    klass = PLATFORM =~ /java/ ? IsItJruby : IsIt19
+    isit19 = klass.new i.spec
+    isit19.fetch!
+  rescue Gem::RemoteFetcher::FetchError => e
     i.say "uh-oh! unable to fetch data for #{name}, maybe it doesn't exist yet?"
-    i.say "http://isitruby19/#{spec.name}"
+    i.say isit19.url
     next
   end
 
   i.say
 
-  if isit19.one_nine? then
-    i.say "#{name} is #{isit19.percent} verified 1.9"
+  if isit19.is_it_for_sure? then
+    i.say "#{name} is #{isit19.percent} verified #{isit19.platform}"
   else
-    comment = isit19.maybe_one_nine?
+    comment = isit19.maybe_is_it?
 
     if comment then
       working = comment['version']
-      i.say "#{name} might work, #{isit19.percent working} say #{working} works on 1.9"
+      i.say "#{name} might work, #{isit19.percent working} say #{working} works on #{isit19.platform}"
     else
-      i.say "Nobody has verified #{name} works with 1.9"
+      i.say "Nobody has verified #{name} works with #{isit19.platform}"
     end
   end
 

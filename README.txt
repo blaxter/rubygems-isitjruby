@@ -3,16 +3,28 @@
 * http://isitruby19.com
 * http://seattlerb.rubyforge.org/rubygems-isit19
 
+* This fork: http://github.com/blaxter/rubygem-isit19/tree/master
+
 == DESCRIPTION:
 
 Lets you figure out if your gems and gems you install might work on 1.9.  Uses
 http://isitruby19.com as its datastore.  Be sure to update the website with
 your experiences!
 
+If you are working with jruby, it uses http://isitjruby.com. For now if you
+create the gem using jruby, it will be this way, with a `gem isitjruby` command.
+But if you generate the gem with normal ruby interpreter you'll get the usual
+`gem isit19` command
+
+
 == FEATURES/PROBLEMS:
 
-* gem isit19 for checking your installed gems
-* gem install plugin that tells you if your installed gem works on 1.9
+* ruby
+  * gem isit19 for checking your installed gems
+  * gem install plugin that tells you if your installed gem works on 1.9
+* jruby
+  * gem isitjruby for checking your installed gems (when using jruby)
+  * gem install plugin that tells you if your installed gem works on jruby
 
 == SYNOPSIS:
 
@@ -27,6 +39,8 @@ your experiences!
 == INSTALL:
 
 * sudo gem install rubygems-isit19
+or from this fork
+* sudo gem install blaxter-rubygem-isit19
 
 == LICENSE:
 
