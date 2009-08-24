@@ -29,17 +29,21 @@ Gem.pre_install do |i| # installer
 
   i.say
 
-  if isit19.is_it_for_sure? then
-    i.say "#{name} is #{isit19.percent} verified #{isit19.platform}"
-  else
-    comment = isit19.maybe_is_it?
-
-    if comment then
+  if isit19.are_there_comments?   
+    if isit19.is_it_for_sure? then
+      i.say "#{name} is #{isit19.percent} verified #{isit19.platform}"
+    elsif ( comment = isit19.maybe_is_it? )
       working = comment['version']
       i.say "#{name} might work, #{isit19.percent working} say #{working} works on #{isit19.platform}"
     else
-      i.say "Nobody has verified #{name} works with #{isit19.platform}"
+      comment = isit19.more_recent
+      works = comment['works_for_me'] ? 'works' : 'fails'
+      msg = "#{comment['name']} says #{comment['version']} #{works}"
+
+      i.say "#{name} probably might not work, #{msg}"
     end
+  else
+    i.say "Nobody has verified #{name} works with #{isit19.platform}"
   end
 
   i.say "Update #{isit19.url} with your experiences!"

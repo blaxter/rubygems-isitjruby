@@ -1,11 +1,12 @@
-=== 1.1.1 / 2009-08-20
-* Bug that always show up gems as maybe valid
-
-=== 1.1.0 / 2009-08-20
-* Forked to work with isitjruby when platform is java
-
-=== 1.0.0 / 2009-08-19
-
-* 1 major enhancement
-  * Birthday!
+*  1.1.2 / 2009-08-24
+  * If there is no comments about our version show up the first comments about the latest version
+  * Manage & develop
+    * Use Jeweler for create the gem
+    * Renamed to rubygems-isitjruby
+ * 1.1.1 / 2009-08-20
+   * Bug that always show up gems as maybe valid
+ * 1.1.0 / 2009-08-20
+   * Forked to work with isitjruby when platform is java
+ *  1.0.0 / 2009-08-19
+   * original rubygems-isit19
 

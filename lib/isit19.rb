@@ -73,6 +73,19 @@ class IsIt19
   end
 
   ##
+  # Returns the more recent comment about this gem
+  
+  def more_recent  
+    @comments.sort.last if are_there_comments?
+  end
+  
+  ##
+  # Whether are the any comments
+  def are_there_comments?
+    @comments.size > 0
+  end
+  
+  ##
   # Returns a percentage of people saying +version+ worked for them
 
   def percent(version = @spec.version)
