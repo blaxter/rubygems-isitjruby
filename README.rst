@@ -1,10 +1,9 @@
 rubygems-isitjruby
 ==================
 
- * http://isitjruby.com
- * http://github.com/blaxter/rubygem-isit19/tree/master
-
- * This gem is a fork of http://seattlerb.rubyforge.org/rubygems-isit19
+* http://isitjruby.com
+* http://github.com/blaxter/rubygem-isit19/tree/master
+* This gem is a fork of http://seattlerb.rubyforge.org/rubygems-isit19
 
 DESCRIPTION
 ===========
@@ -17,11 +16,13 @@ FEATURES/PROBLEMS
 =================
 
 * jruby
+
   * gem isitjruby for checking your installed gems (when using jruby)
   * gem install plugin that tells you if your installed gem works on jruby
 
 USE
 ===
+This could be a typical use::
 
     $ jgem install daemons
 
@@ -37,12 +38,13 @@ USE
             Daemons use fork, jruby doesn't support fork, so it doesn't work and
             never will
 
+Do not forget to add you comments to http://isitjruby.org ;)
+
 INSTALL
 =======
 
- * From github: `sudo gem install blaxter-rubygem-isitjruby`
-
- * Or you could also install from gemcutter
+* From github: `sudo gem install blaxter-rubygem-isitjruby`
+* Or you could also install from gemcutter::
 
       sudo sources add http://gemcutter.com && sudo gem install rubygems-isitjruby
 
